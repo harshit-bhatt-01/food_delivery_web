@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style media="screen">
+      body{
+        background: #e6e9ed;
+      }
+      .ct{
+        width:400px;
+        margin-top:100px;
+        padding:20px;
+        border-radius:5px;
+        margin:0 auto;
+        text-align:center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ct shadow p-3 mb-5 bg-white rounded">
+      <h3>Payment Amount: <%= payment %></h3>
+      <h3>Select mode of payment</h3>
+      <form class="" action="/profile/<%= orderid %>/checkout/orderConfirmation" method="post">
+        Cash on Delivery <input type="radio" name="payment" value="cod" required>
+        <input type="submit" value="Confirm Order">
+      </form>
+    </div>
+  </body>
+</html>

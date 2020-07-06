@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body{
+        background: #e6e9ed;
+      }
+      .navbar-brand{
+  color: rgb(246, 135, 19);
+  -webkit-transition: 0.5s;
+}
+.restaurant{
+  width: 100%;
+}
+.image{
+  display: inline;
+  float:left;
+  height: 210px;
+  border: 1px solid black;
+}
+.holder{
+  display:flex;
+  justify-content: space-around;
+  margin:35px;
+  box-sizing:border-box;
+}
+.t1,.t2{
+  width:40%;
+  box-sizing:border-box
+}
+.content{
+  margin-top: 20px;
+  margin-left: 350px;
+}
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-sm bg-dark navbar-deafult">
+      <div class="container">
+        <a class="navbar-brand" href="home.html">Foodyz</a><ul class="navbar-nav">
+          <% if(customer){ %>
+            <li style="margin-right: 10px;" class="nav-item">
+              <a style="color:rgb(246, 135, 19);" class="nav-link" href="/profile/<%= customer._id %>/cart">Cart</a>
+            </li>
+          <% } %>
+
+        <!-- <form class="form-inline" action="#">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search Restaurant">
+          <button class="btn btn-warning" type="submit">Search</button>
+        </form> -->
+      </div>
+    </nav>
+
+    <div style="margin-top: 100px;" class="container">
+      <h2>List of menu</h2>
+      <div class="restaurant shadow p-3 mb-5 bg-white rounded">
+      <% menu.forEach(function(item){ %>
+        <div class="holder">
+          <div class="t1">
+            <img style="height: 200px; width: 250px;" src="<%= item.image %>" alt="<%= item.name %>">
+          </div>
+
+          <div class="t2">
+          <h2><%= item.name %> -  Rs <%= item.price %></h2>
+          <p><span>Description: </span><%= item.description %></p>
+
+            <% if(customer){ %>
+              <form action="/profile/<%= customer._id %>/menulist/<%= restaurantid %>/addtocart/<%= item._id %>" method="post">
+                    Quantity: <select style="display: block; margin-bottom: 10px;" class="" name="quantity" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                              </select>
+              <input class="btn btn-danger" type="submit" name="" value="Add to Cart">
+            <% } else { %>
+              <form action="/" method="get">
+                    Quantity: <select style="display: block; margin-bottom: 10px;" class="" name="quantity" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                              </select>
+              <input type="submit" class="btn btn-warning" href="#">
+            <% } %>
+
+          </form>
+          </div>
+          </div>
+          <% }) %>
+          </div>
+          </div>
+  </body>
+</html>
+
+
+<!-- <script type="text/javascript">
+  var count = parseInt(document.getElementById("quantity").value,10);
+    function remove(){
+        if(count > 1){
+          count = count - 1;
+        } else {
+          alert("Minimum order quantity must be atleast 1")
+        }
+        document.getElementById("quantity").value = count;
+    }
+    function add(){
+      if(count < 4){
+        count = count + 1;
+      }else {
+        alert("Maximum order quantity cannot exceed 4")
+      }
+      document.getElementById("quantity").value = count;
+    }
+</script> -->

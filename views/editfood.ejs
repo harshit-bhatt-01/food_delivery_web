@@ -1,0 +1,22 @@
+<form action="/restaurant/dashboard/<%= currentrestaurant._id %>/edit/<%= currentfood._id %>?_method=PUT" method="post">
+
+<div id="readroot">
+  <select name="category" required>
+    <option value="">Category</option>
+		<option value="starters">Starters</option>
+		<option value="maincourse">Main Course</option>
+		<option value="softdrinks">Soft Drinks</option>
+		<option value="desserts">Desserts</option>
+		<option value="combo">Combo</option>
+	</select><br><br>
+
+	<input name="title" value="<%= currentfood.name %>"><br><br>
+
+	<textarea rows="10" cols="30" name="description"><%= currentfood.description %></textarea>
+	<br><br>
+	<input id="myRadio" type="radio" name="type" value="veg" required>Veg<br>
+	<input id="myRadio" type="radio" name="type" value="nonveg">Non-Veg<br><br>
+  <input type="number" name="price" placeholder="amount" value="<%= currentfood.price %>"><br><br>
+</div>
+    <input type="submit" value="Save Changes">
+</form>

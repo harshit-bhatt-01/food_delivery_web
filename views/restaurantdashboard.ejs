@@ -1,0 +1,204 @@
+<!-- <h2>Logged in as <%= user.name %></h2><br> <a href="/">Logout</a><br><br>
+<a href="/restaurant/dashboard/<%= user._id %>/addfood">Add food</a><br><br>
+
+<h3>List of menu</h3>
+<ul>
+<% menu.forEach(function(fooddata){ %>
+    <li>
+      <p><%= fooddata.name %></p>
+      <% if(fooddata.image == ''){ %>
+          <form action="/restaurant/dashboard/<%= user._id %>/uploadImage/<%= fooddata._id %>" method="post" enctype="multipart/form-data">
+              Add Image: <input type="file" name="image" id="image" accept="image/*" required>
+              <input type="submit" value="Upload">
+          </form>
+      <% } else { %>
+          <img style="width: 150px; height: 150px;" src="<%= fooddata.image %>" alt="<%= fooddata.name %>">
+      <% } %>
+
+      <a href="/restaurant/dashboard/<%= user._id %>/edit/<%= fooddata._id %>">Edit</a>
+      <form action="/restaurant/dashboard/<%= user._id %>/removefood/<%= fooddata._id %>?_method=DELETE" method="post">
+          <input type="submit" value="Remove">
+      </form>
+    </li>
+<% }); %></ul>
+
+<br><br>
+
+<div class="">
+  <h2>Orders</h2>
+  <% for(var i=0; i<customer.length; i++){ %>
+    <% if(customer[i] != null){ %>
+    <div class="">
+      <p><%= customer[i].name %>, <%= customer[i].contact %>, <%= customer[i].address %></p>
+      <h4>Order</h4>
+        <% order[i].forEach(function(order_data){ %>
+          <li>
+            <%= order_data.food.name %>
+             - Quantity: <%= order_data.quantity %>
+          </li>
+        <% }); %>
+
+        <% if(customer[i].orderaccepted == 1){ %>
+          <a href="/restaurant/dashboard/<%= user._id %>/foodPrepared/<%= customer[i].name %>">Food prepared and sent</a>
+        <% } else { %>
+          <a href="/restaurant/dashboard/<%= user._id %>/acceptOrder/<%= customer[i].name %>">Accept Order</a>
+        <% } %>
+    </div>
+  <% } %>
+  <% } %>
+</div> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body{
+        background: #e6e9ed;
+      }
+      .navbar-brand{
+  color: rgb(246, 135, 19);
+  -webkit-transition: 0.5s;
+}
+.restaurant{
+  width: 100%;
+  height: 200px;
+}
+.image{
+  display: inline;
+  float:left;
+  width: 280px;
+  height: 172px;
+  border: 1px solid black;
+}
+.content{
+  margin-top: 10px;
+  margin-left: 400px;
+}
+#welcome{
+  color: white;
+  margin-top: 7px;
+  margin-right: 10px;
+}
+#addimage{
+  width: 100px;
+  float: left;
+}
+#del{
+  display: inline;
+}
+.container1{
+  width: 60%;
+  margin-left: 20px;
+}
+.container2{
+  align: right;
+  width: 30%;
+  display: block;
+}
+.holder{
+  display:flex;
+  margin-top:150px;
+  justify-content: space-evenly;
+}
+.order{
+  margin-top: 20px;
+}
+.attr{
+  display: inline-block;
+}
+.attr1{
+  display: inline;
+}
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-sm bg-dark navbar-deafult">
+      <div class="container">
+        <a class="navbar-brand" href="/">Foodyz</a>
+        <ul class="navbar-nav">
+          <li id="welcome">Welcome <%= user.name %></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              My Account
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/restaurant/dashboard/<%= user._id %>/addfood">Add Food</a>
+              <a class="dropdown-item" href="/restaurant/logout">Logout</a>
+            </div>
+          </li>
+        </div>
+      </nav>
+
+<div class="holder">
+    <div class="container1">
+      <h2>Food List</h2>
+
+      <% menu.forEach(function(fooddata){ %>
+          <div class="restaurant shadow p-3 mb-5 bg-white rounded">
+            <% if(fooddata.image == ''){ %>
+                <form id="addimage" action="/restaurant/dashboard/<%= user._id %>/uploadImage/<%= fooddata._id %>" method="post" enctype="multipart/form-data">
+                    Add Image: <input type="file" name="image" id="image" accept="image/*" required>
+                    <input type="submit" value="Upload">
+                </form>
+            <% } else { %>
+                <img class="image" src="<%= fooddata.image %>" alt="<%= fooddata.name %>">
+            <% } %>
+            <div class="content">
+              <h2><%= fooddata.name %></h2>
+              <h4 style="margin-top: 15px;">Price - Rs.<%= fooddata.price %></h4>
+            <a style="margin-top: 10px;" class="btn btn-warning" href="/restaurant/dashboard/<%= user._id %>/edit/<%= fooddata._id %>">Edit</a>
+            <form id="del" action="/restaurant/dashboard/<%= user._id %>/removefood/<%= fooddata._id %>?_method=DELETE" method="post">
+                <input style="margin-top: 10px;" class="btn btn-danger" type="submit" value="Remove">
+            </form>
+            </div>
+      </div>
+      <% }); %>
+
+    </div>
+
+    <div class="container2">
+      <h2>Orders</h2>
+      <% for(var i=0; i<customer.length; i++){ %>
+        <% if(customer[i] != null){ %>
+        <div style="width: auto;" class="shadow p-3 mb-5 bg-white rounded">
+          <div class="">
+            <h6 class="attr">Name - </h6><p class="attr1"><%= customer[i].name %></p>
+          </div>
+          <div class="">
+            <h6 class="attr">Contact - </h6><p class="attr1"><%= customer[i].contact %></p>
+          </div>
+          <div class="">
+            <h6 class="attr">Address - </h6><p class="attr1"><%= customer[i].address %></p>
+          </div>
+
+          <h5 style="margin-top:20px;">Order Details</h5>
+            <% order[i].forEach(function(order_data){ %>
+              <li>
+                <%= order_data.food.name %>
+                 - Quantity: <%= order_data.quantity %>
+              </li>
+            <% }); %>
+
+            <% if(customer[i].orderaccepted == 1){ %>
+              <a  class="order btn btn-outline-warning" href="/restaurant/dashboard/<%= user._id %>/foodPrepared/<%= customer[i].name %>">Food prepared and sent</a>
+            <% } else { %>
+              <a class="order btn btn-outline-warning" href="/restaurant/dashboard/<%= user._id %>/acceptOrder/<%= customer[i].name %>">Accept Order</a>
+            <% } %>
+        </div>
+      <% } %>
+      <% } %>
+    </div>
+
+  </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!-- <head>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+</head>
+
+<form action="/restaurant/register" method="post">
+    Name of Restaurant: <input type="text" name="name" required><br><br>
+    Address: <input type="text" name="address" required><br><br>
+    City:  <input type="text" name="city" required><br><br>
+    State: <select id="state" name="state" required>
+      <option value="">Select State</option>
+      <% state.forEach(function(data){ %>
+          <option value="<%= data.state %>"><%= data.state %></option>
+      <% }); %>
+    </select><br><br>
+
+    District: <select id="dist" name="district" required>
+        <option value=""> Select District</option>
+    </select><br><br>
+
+    Pin Code: <input type="number" name="pincode" required><br><br>
+    Contact: <input type="number" name="contact" required><br><br>
+    username: <input type="text" name="username" required><br><br>
+    Password: <input type="password" name="password" required><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+<script type="text/javascript">
+  state.addEventListener("change", dosomething, false);
+  function dosomething(){
+    var selectedstate=document.getElementById("state").value;
+    <% state.forEach(function(data){ %>
+      if("<%= data.state %>" == selectedstate){
+        var d = "<%= data.districts %>";
+       }
+  <% }) %>
+  var arr = d.split(",")
+  $('#dist').find('option').remove();
+  $('#dist').append('<option value='+""+'>'+"Select City"+'</option>');
+  for(var i = 0; i < arr.length; i++) {
+      $('#dist').append('<option value='+arr[i]+'>'+arr[i]+'</option>');
+    }
+  }
+</script> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style media="screen">
+      body{
+        background: url('https://res.cloudinary.com/foodyz/image/upload/v1571383732/back_aubihl.jpg');
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+      .border{
+        margin-left: 420px;
+        margin-top: 150px;
+        height: 1000px;
+        width: 700px;
+        }
+        .container{
+          margin-top: 20px;
+        }
+        .label{
+          font-weight: bold;
+        }
+        #new{
+          text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="border shadow-lg p-3 mb-5 bg-white rounded">
+      <div class="container">
+        <h2 style="margin-bottom: 20px;">New Registration</h2>
+        <form style="margin-bottom: 20px;" action="/restaurant/register" method="post">
+          <div class="form-group">
+            <label class="label" for="name">Restaurant Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label class="label" for="contact">Mobile Number</label>
+            <input type="number" class="form-control" id="number" placeholder="Enter Mobile Number" name="contact" required>
+          </div>
+          <div class="form-group">
+            <label class="label" for="address">Address</label>
+            <input type="text" class="form-control" id="address" placeholder="Address" name="address" required>
+          </div>
+          <div class="form-group">
+            <label class="label" for="state">State: </label>
+            <select class="form-control" id="state" name="state" required>
+              <option value="">Select State</option>
+              <% state.forEach(function(data){ %>
+                  <option value="<%= data.state %>"><%= data.state %></option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="label" for="district">District: </label>
+            <select class="form-control" id="dist" name="district" required>
+                <option value=""> Select District</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="label" for="address">City</label>
+            <input type="text" class="form-control" placeholder="City" name="city" required>
+          </div>
+          <div class="form-group">
+            <label class="label" for="address">Pin Code</label>
+            <input type="number" class="form-control" placeholder="pincode" name="pincode" required>
+          </div>
+          <div class="form-group">
+            <label class="label" for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
+          </div>
+          <div class="form-group">
+            <label class="label" for="pwd">Password</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" id="check" name="remember"> I have read all the <a id="new" href="#">Terms and Conditions</a> carefully</label>
+          </div>
+          <input id="btncheck" type="submit" class="btn btn-warning" value="Register" required>
+        </form>
+        <a id="new" href="/restaurant/login">Already have an account</a>
+      </div>
+    </div>
+    <script type="text/javascript">
+      state.addEventListener("change", dosomething, false);
+      function dosomething(){
+        var selectedstate=document.getElementById("state").value;
+        <% state.forEach(function(data){ %>
+          if("<%= data.state %>" == selectedstate){
+            var d = "<%= data.districts %>";
+           }
+      <% }) %>
+      var arr = d.split(",")
+      $('#dist').find('option').remove();
+      $('#dist').append('<option value='+""+'>'+"Select City"+'</option>');
+      for(var i = 0; i < arr.length; i++) {
+          $('#dist').append('<option value='+arr[i]+'>'+arr[i]+'</option>');
+        }
+      }
+
+      $('#check').change(function () {
+        $('#btncheck').prop("disabled", !this.checked);
+      }).change()
+    </script>
+  </body>
+</html>

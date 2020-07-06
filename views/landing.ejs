@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style media="screen">
+      .c1{
+        margin-top: 70px;
+      }
+      body{
+        background: #e6e9ed;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-sm bg-dark navbar-deafult">
+      <div class="container">
+        <a class="navbar-brand" href="/">Foodyz</a><ul class="navbar-nav">
+          <!-- <li style="margin-right: 10px;" class="nav-item">
+            <a style="color:rgb(246, 135, 19);" class="nav-link" href="#">Login</a>
+          </li> -->
+          <% if(customer){ %>
+            <p style="color:rgb(246, 135, 19);margin-left: 30px; margin-top:12px; margin-right: 10px;">Logged in as <%= customer.name %></p>
+          <% } else { %>
+            <a href="/auth/google" style="color:rgb(246, 135, 19);margin-left: 30px; margin-top:1px; margin-right: 10px;">Login</a>
+          <% } %>
+          <% if(customer){ %>
+        <a style="text-decoration: none;cursor: pointer; color:rgb(246, 135, 19);margin-left: 30px; margin-top:12px; margin-right: 10px;" href="/profile/customerlogout">Logout</a>
+        <% } %>
+      </div>
+    </nav>
+    <div class="container c1">
+      <p>Location - <%= location %></p><br>
+      <% if(restaurant.length > 0){ %>
+      <% restaurant.forEach(function(data){ %>
+        <div class="shadow p-3 mb-5 bg-white rounded">
+          <h3><%= data.name %></h3>
+          <h4><%= data.address %>, <%= data.city %>, <%= data.state %>,</h4>
+          <form action="/restaurant/info/<%= data._id %>" method="get">
+              <input class="btn btn-warning" type="submit" value="Show More">
+          </form>
+          </div>
+      <% }); %>
+      <% } else { %>
+        <p>No available restaurants in this area</p>
+      <% } %>
+
+
+    </div>
+
+  </body>
+</html>

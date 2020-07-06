@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container border shadow-lg p-3 mb-5 bg-white rounded">
+      <h2>Complete Your details </h2>
+
+      <form action="/profile/update" method="post">
+          Address: <input class="form-control" type="text" name="address" required><br><br>
+          City:  <input class="form-control" type="text" name="city" required><br><br>
+          State: <select class="form-control" id="state" name="state" required>
+            <option value="">Select State</option>
+            <% state.forEach(function(data){ %>
+                <option value="<%= data.state %>"><%= data.state %></option>
+            <% }); %>
+          </select><br><br>
+
+          District: <select class="form-control" id="dist" name="district" required>
+              <option value=""> Select District</option>
+          </select><br><br>
+
+          Pin Code: <input class="form-control" type="text" name="pincode" required><br><br>
+          Contact: <input class="form-control" type="number" name="contact" minlength="10" maxlength="10" required><br><br>
+          <input class="btn btn-success" type="submit" value="Submit">
+      </form>
+    </div>
+
+
+    <script type="text/javascript">
+      state.addEventListener("change", dosomething, false);
+      function dosomething(){
+        var selectedstate=document.getElementById("state").value;
+        <% state.forEach(function(data){ %>
+          if("<%= data.state %>" == selectedstate){
+            var d = "<%= data.districts %>";
+           }
+      <% }) %>
+      var arr = d.split(",")
+      $('#dist').find('option').remove();
+      $('#dist').append('<option value='+""+'>'+"Select City"+'</option>');
+      for(var i = 0; i < arr.length; i++) {
+          $('#dist').append('<option value='+arr[i]+'>'+arr[i]+'</option>');
+        }
+      }
+    </script>
+
+  </body>
+</html>

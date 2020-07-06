@@ -1,0 +1,168 @@
+<!-- <head>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+</head>
+
+<a href="/"><h2>Foodyz</h2></a>
+
+<a href="/auth/login">Login</a>
+<a href="/restaurant/login">Restaurant Login</a><br><br>
+
+<form action="/home" method="get">
+  <input type="text" name="city" placeholder="Enter current city">
+</form> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <style media="screen">
+      body{
+        background: rgb(246, 135, 19);
+      }
+      #logo{
+        height: 700px;
+        width: 50%;
+      }
+      #search{
+        width: 20%;
+        float: right;
+        margin-top: 250px;
+        margin-right: 70px;
+      }
+      #search h1{
+        padding-bottom: 10px;
+      }
+      #nav{
+        float: right;
+        height: 30px;
+        display: inline;
+        margin-right: 30px;
+      }
+      #login{
+        padding: 7px;
+        background-color: #d34836;
+        text-decoration: none;
+        color: #2d2d2d;
+        cursor: pointer;
+        font-size: 25px;
+        font-family: Segoe UI;
+        -webkit-transition: 0.5s;
+      }
+      #login:hover{
+        text-decoration: none;
+        color: #d2d2d2;
+      }
+      .bottom{
+        background-color: white;
+        height: 800px;
+        text-align: center;
+        padding-top: 20px;
+      }
+      .content{
+        padding-bottom: 40px;
+        border-bottom: 1px solid black;
+      }
+      .food{
+        border-radius: 10px;
+        height: 200px;
+        width: 270px;
+        margin: 40px;
+        opacity: 0.7;
+        -webkit-transition: 0.5s;
+      }
+      .food:hover{
+        height: 250px;
+        width: 320px;
+        opacity: 1;
+      }
+      .footer{
+        margin-top: 50px;
+        height: 200px;
+        background-color: #343a40;
+      }
+      .footer1{
+        margin-top: 30px;
+        font-size: 15px;
+        color: white;
+        float: left;
+      }
+      .footer11{
+        margin-top: 20px;
+        font-size: 15px;
+        color: white;
+        float: right;
+      }
+      .footer2{
+        color: white;
+        height: 60px;
+        background-color: #212529;
+        margin-top: 2px;
+      }
+      #new{
+        font-size: 17px;
+        color: white;
+      }
+      #new a{
+        text-decoration: none;
+        cursor: pointer;
+        -webkit-transition: 0.8s;
+        color: rgb(246, 135, 19);
+      }
+      #new a:hover{
+        color: #ebeb2f;
+      }
+
+    </style>
+    <title>Foodyz</title>
+  </head>
+  <body>
+      <img id="logo" src="https://res.cloudinary.com/foodyz/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1571382884/Capture_xdwzea.jpg" alt="logo">
+      <p class="font-weight-light" id="nav"><a id="login" href="/auth/google"><i class="fab fa-google-plus-g"></i> <span style="color: white;">Login</span></a></p>
+      <form id="search" action="/search/home" method="get">
+        <h1 align="center" class="font-weight-light">Search your City</h1>
+        <input type="search" class="form-control form-control-lg" placeholder="Enter City Name" name="city">
+      </form>
+      <div class="bottom">
+          <h3 style="font-family: Segoe UI;">About Foodyz</h3>
+          <div class="container content">
+              <p style="font-size: 20px;">Foodyz is a Food Delivery Startup based on online platform. We deliver your favourite food at your doorstep with huge offers and discounts.</p>
+          </div>
+          <div class="container content">
+            <h2>Food Gallery</h2>
+            <img class="food" src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="">
+            <img class="food" src="https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="">
+            <img class="food" src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80" alt="">
+          </div>
+          <div class="footer">
+              <div class="container">
+                <div class="footer1">
+                  <p><i class="far fa-envelope"></i>   support.foodyz@gmail.com</p>
+                  <p> +91 8544213245, +91 8544213246 </p>
+                  <p><span style="font-size: 20px;">Address: </span>  2/103, Z-Square, Katpadi</p>
+                  <p>Vellore, Tamil Nadu - 632 014</p>
+                </div>
+                <div class="footer11">
+                  <pre style="color: white; font-size: 20px;">Useful links</pre>
+                  <p id="new">Add your Restaurant <a href="/restaurant/login">Click here to Get started with us</a></p>
+                </div>
+              </div>
+          </div>
+          <div class="footer2">
+              <p style="padding-top: 15px;">Copyright <i class="far fa-copyright"></i> Foodyz 2019</p>
+          </div>
+      </div>
+
+  </body>
+</html>

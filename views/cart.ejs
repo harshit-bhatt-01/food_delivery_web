@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-sm bg-dark navbar-deafult">
+      <div class="container">
+        <a class="navbar-brand" href="/">Foodyz</a><ul class="navbar-nav">
+
+        <p style="color:rgb(246, 135, 19);margin-left: 30px; margin-top:12px; margin-right: 10px;">Logged in as <%= customer.name %></p>
+        <a style="text-decoration: none;cursor: pointer; color:rgb(246, 135, 19);margin-left: 30px; margin-top:12px; margin-right: 10px;" href="/profile/customerlogout">Logout</a>
+      </div>
+    </nav>
+  <div class="container" style="margin-top: 100px;">
+
+    <h2>Cart Details..!</h2>
+
+    <div class="itemholder" style="display: flex; flex-wrap:wrap; text-align:center;">
+    <% if(cart.cart.length > 0){ %>
+      <% cart.cart.forEach(function(item){ %>
+        <div class="item" style="padding:20px">
+        <img style="width: 200px; height: 150px;" src="<%= item.food.image %>" alt="<%= item.food.name %>">
+        <h3><%= item.food.name %></h3>
+        <h4>Price: <%= item.food.price %> Quantity: <%= item.quantity %></h4>
+        <form action="/profile/<%= cart._id %>/cart/remove/<%= item.food._id %>" method="post">
+          <input type="submit" class="btn btn-outline-danger" name="" value="Remove from cart">
+        </form>
+        </div>
+      <% }); %>
+    <% } else { %>
+      <p>Your Cart is Empty.</p>
+    <% } %>
+    </div>
+
+    <br><br>
+
+    <div class="total" style="width:400px; margin:0 auto; padding:20px; background-color: lightgrey; border-radius: 5px; text-align:center">
+      <h2>Cart Total</h2>
+      <% cart.cart.forEach(function(item){ %>
+        <h3 style="display: inline"><%= item.food.name %>  -  </h3>
+        <p style="display: inline; margin-bottom:3px;"> &#8377 <%= item.food.price %> * <%= item.quantity %></p>
+        <br>
+      <% }); %>
+
+      <h3>Total: &#8377 <%= total %></h3>
+      <% if(total>0){ %>
+        <form class="" action="/profile/<%= cart._id %>/checkout" method="post">
+          <input style="display: none;" type="text" name="total" value="<%= total %>">
+          <input type="submit" class="btn btn-success" name="" value="Proceed to Checkout">
+        </form>
+      <% } %>
+    </div>
+    <a href="/profile/<%= cart._id %>">Add more items</a>
+  </div>
+  </body>
+</html>
