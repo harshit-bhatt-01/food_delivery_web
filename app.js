@@ -8,7 +8,6 @@ var express = require("express"),
 	googleStrategy = require("passport-google-oauth20"),
 	keys = require("./keys"),
 	methodOverride = require("method-override"),
-	messagebird = require("messagebird")("IaxoJGl8RXuxJI6M3BkAJql7a");
 	var fs = require("fs");
 
 	var states = JSON.parse(fs.readFileSync("states.json").toString());
